@@ -1,0 +1,48 @@
+<?php
+
+namespace backend\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "message".
+ *
+ * @property integer $m_id
+ * @property integer $u_id
+ * @property string $m_row
+ * @property string $m_examine
+ */
+class Message extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'message';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['u_id'], 'integer'],
+            [['m_row', 'm_examine'], 'string', 'max' => 255]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'm_id' => 'M ID',
+            'u_id' => 'U ID',
+            'm_row' => 'M Row',
+            'm_examine' => 'M Examine',
+        ];
+    }
+}

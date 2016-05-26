@@ -1,0 +1,106 @@
+<?php
+use yii\widgets\ActiveForm;
+$form = ActiveForm::begin([
+    'options' => ['enctype' => 'multipart/form-data'],
+    'action'=>'index.php?r=advertisement/app',
+    'method'=>'post',
+])
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>信息管理系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="scripts/jquery/jquery-1.7.1.js"></script>
+<link href="style/authority/basic_layout.css" rel="stylesheet" type="text/css">
+<link href="style/authority/common_style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="scripts/authority/commonAll.js"></script>
+<script type="text/javascript" src="scripts/jquery/jquery-1.4.4.min.js"></script>
+<script src="scripts/My97DatePicker/WdatePicker.js" type="text/javascript" defer="defer"></script>
+<script type="text/javascript" src="scripts/artDialog/artDialog.js?skin=default"></script>
+
+	
+</head>
+<body>	
+	<div id="container">
+		<div class="ui_content">
+			<table  cellspacing="20" cellpadding="0" width="100%" align="left" border="0">	
+				<tr>
+					<td class="ui_text_rt">标题 :</td>
+					<td class="ui_text_lt">
+						<input type="text"  name="a_title" id="a_title" onblur="add_title()"/>
+					<span id="s_title"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="ui_text_rt">上传图片 :</td>
+					<td class="ui_text_lt">
+						<?= $form->field($model, 'a_img')->fileInput() ?>
+					</td>
+				</tr>
+				<tr>
+					<td class="ui_text_rt">是否显示 :</td>
+					<td class="ui_text_lt">
+						<input type="radio"  name="a_show"  value="1" />是
+						<input type="radio"  name="a_show"  value="2" />否
+					</td>
+				</tr>
+				<tr>
+					<td class="ui_text_rt">排序 :</td>
+					<td class="ui_text_lt">
+						<input type="text"  name="a_order" id="a_order" onblur="add_order()"/>
+						<span id="s_order"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td class="ui_text_lt">
+						&nbsp;<input  type="submit" value="提交" />
+						&nbsp;<input  type="reset" value="取消" />
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>
+<script>
+//验证标题
+	function add_title(){
+		var a_title=document.getElementById('a_title').value;
+		var title=/^[\u4e00-\u9fa5]{2,6}$/;
+		if(a_title!=''){
+		
+			if(title.test(a_title)){
+				document.getElementById('s_title').innerHTML='<font color="red">√</font>';
+                return true;
+			}else{
+				document.getElementById('s_title').innerHTML='<font color="red">标题格式错误</font>';
+                return false;
+			}
+				
+		}else{
+				document.getElementById('s_title').innerHTML='<font color="red">标题不能为空</font>';
+                return false;
+		}
+	}
+	//验证排序
+	function add_order(){
+		var a_order=document.getElementById('a_order').value;
+		
+		var order=/^\d{1,}$/;
+		if(a_order!=''){	
+			if(order.test(a_order)){
+				document.getElementById('s_order').innerHTML='<font color="red">√</font>';
+                return true;
+			}else{
+				document.getElementById('s_order').innerHTML='<font color="red">排序格式错误</font>';
+                return false;
+			}
+		}else{
+			document.getElementById('s_order').innerHTML='<font color="red">排序不能为空</font>';
+            return false;
+		}
+	}
+</script>
